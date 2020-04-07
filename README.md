@@ -1,7 +1,7 @@
 # Poker game：simplified "Dou dizhu"
 
 ## Team members
-@xczhang UID：3035639290 e-mail: xczhang7@connect.hku.hk
+@xczhang7 UID：3035639290 e-mail: xczhang7@connect.hku.hk
 
 @你的名字
 
