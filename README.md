@@ -3,7 +3,7 @@
 ## Team members
 @xczhang7 UID：3035639290 e-mail: xczhang7@connect.hku.hk
 
-@你的名字
+@Dora-Deng UID : 3035692424 e-mail: u3569242@connect.hku.hk
 
 ## Project description
 The game "Dou dizhu" is a popular poker game in China. It has relatively simple and understandable rules. See wikipedia for the full version of the rules: https://en.wikipedia.org/wiki/Dou_dizhu.
