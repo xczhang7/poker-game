@@ -19,3 +19,9 @@ However, in this project, we will ignore most of the special rules. Players will
 To protect the game's fairness, players' CARDS will not be displayed on the screen. Instead, the information will be stored in corresponding files. For example, player1's hand CARDS will be stored in a file called "player1.txt". Then players take turns looking at their files. 
 
 ## List of features
+
+1. void shuffle() function to generate random shuffle event.
+2. Using Stack to store game status.
+3. 
+4.
+5. Split the program into multiple files. Main.cpp should have the main function, each of other files should have a function.
