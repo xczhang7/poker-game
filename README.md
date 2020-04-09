@@ -28,10 +28,10 @@ The game flow is as follows:
 7. When a player's hand is empty, print "username wins!" on the screen.
 
 
-## List of features
+## List of functions correspond to the coding requirement
 
-1. void shuffle() function to generate random shuffle event.
-2. Using Stack to store game status.
+1. We have two functions in our plan that correspond to requirement 1: the function that generate the order of players playing their cards, and the deal function. 
+2. We use data structure "Player" to store the imformation of players（player's name, and his corresponding file that stores his hands）: </br> struct Player{</br> string player_name, file_name;</br> };</br>
 3. 
 4. Create files called "Player1.txt", "Player2.txt" and "Player3.txt", each file store the cards the player own into it.
 5. Split the program into multiple files. Main.cpp should have the main function, each of other files should have a function.
