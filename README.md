@@ -22,6 +22,6 @@ To protect the game's fairness, players' CARDS will not be displayed on the scre
 
 1. void shuffle() function to generate random shuffle event.
 2. Using Stack to store game status.
-3. 
+3. Dynamic memory allocation with files("Player1.txt", "Player2.txt" and "Player3.txt"). 
 4. Create files called "Player1.txt", "Player2.txt" and "Player3.txt", each file store the cards the player own into it.
 5. Split the program into multiple files. Main.cpp should have the main function, each of other files should have a function.
