@@ -7,8 +7,8 @@
 using namespace std;
 
 struct player{
-  int order;
-  string player_name,file_name;
+  string file_name;
+  string player_name;
   vector<string>hand;
 };
 
