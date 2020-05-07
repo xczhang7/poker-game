@@ -7,7 +7,7 @@
 #include<fstream>
 using namespace std;
 
-//如果我函数出错了，你可以直接根据我写在函数顶上的描述重写。
+//如果我函数出错了，你可以直接根据我写在函数顶上的描述重写。    已看，有做标记，你可以看看我的标记对不对。
 //或者告诉我哪些test_case过不了。
 //我知道合作写代码这问题没法解决。
 
@@ -70,7 +70,7 @@ void insertVec(string fileName, vector<int>obj){
         case 3:s<<DIAMOND;break;
       }
       switch(obj[i]%13){
-        case 0:s<<"A ";break;
+        case 0:s<<"A ";break;      //这里需要看看改不改，原因在权重那里，我有做标记。
         case 10:s<<"J ";break;
         case 11:s<<"Q ";break;
         case 12:s<<"K ";break;
@@ -251,7 +251,7 @@ bool isOnePair(vector<int>obj){
 
   for(int i=0;i<2;i++)
     obj[i]%=13;
-  sort(obj.begin(),obj.end());   //这一步可以省去吧？
+  sort(obj.begin(),obj.end());                  //这一步可以省去吧？
   if(obj[0]==obj[1])
     return true;
   else
@@ -303,14 +303,22 @@ bool isThreeOfApair(vector<int>obj){
     obj[i]%=13;
   sort(obj.begin(),obj.end());
   int repeat=1,max_repeat=1,sec_repeat=1;
+  
+  // int i=0;
+  // if ((obj[i]==obj[i+1])==obj[i+2] && (obj[i+3]==obj[i+4])) 
+  // return true;
+  // if ((obj[i]==obj[i+1]) && (obj[i+2]==obj[i+3]==obj[i+4])) 
+  // return false;
+  
+  
   for(int i=0;i<4;++i){
     if (obj[i]==obj[i+1]){
       repeat++;
       if (repeat>max_repeat)
         max_repeat=repeat;
       else if (repeat<max_repeat&&repeat>sec_repeat)
-        sec_repeat=repeat; //不好意思，我对这里感到疑惑。 repeat>=max_repeat
-             //else if 这种情况是否会存在呢？ 抱歉，因为代码不好check，我只能人工检查，很大几率我会出错。
+        sec_repeat=repeat;                          //不好意思，我对这里感到疑惑。 repeat>=max_repeat
+                                 //else if 这种情况是否会存在呢？ 抱歉，因为代码不好check，我只能人工检查，很大几率我会出错。
     }
     else
       repeat=1;
