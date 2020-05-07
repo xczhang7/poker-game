@@ -46,6 +46,7 @@ void guide(){
   cout<<"3.c: play a hand;"<<endl;
 }
 
+
 //输入vector<int>，再把手牌输入到对应文件里。要检查。
 void insertVec(string fileName, vector<int>obj){
   ofstream s;
@@ -54,22 +55,39 @@ void insertVec(string fileName, vector<int>obj){
     cout<<"error!"<<endl;
     exit(1);
   }
+
+  sort(obj.begin(),obj.end());
+  for(int j=0;j<obj.size();j++)
+    cout<<obj[j]<<' ';
+  cout<<'\n'<<endl;
+
   for(int i=0;i<obj.size();++i){
-    switch(obj[i]/13){
-      case 0:s<<SPADE;break;
-      case 1:s<<CLUB;break;
-      case 2:s<<HEART;break;
-      case 3:s<<DIAMOND;
+    if(obj[i]<51){
+      switch(obj[i]/13){
+        case 0:s<<SPADE;break;
+        case 1:s<<CLUB;break;
+        case 2:s<<HEART;break;
+        case 3:s<<DIAMOND;break;
+      }
+      switch(obj[i]%13){
+        case 0:s<<"A ";break;
+        case 10:s<<"J ";break;
+        case 11:s<<"Q ";break;
+        case 12:s<<"K ";break;
+        case 1: case 2: case 3:
+        case 4: case 8: case 7:
+        case 6: case 5: case 9:
+          s<<obj[i]%13+1<<' ';break;
+        }
+      }
+      else{
+        switch(obj[i]%13){
+          case 0:s<<"B_Jack ";break;
+          case 1:s<<"R_Jack ";break;
+        }
+      }
     }
-    switch(obj[i]%13){
-      case 0:s<<"A ";break;
-      case 10:s<<"J ";break;
-      case 11:s<<"Q ";break;
-      case 12:s<<"K ";break;
-      default:
-        s<<obj[i]%13+1<<' ';
-    }
-  }
+    s.close();
 }
 
 //判断string在不在vector里。是辅助下面写的remVec函数的。

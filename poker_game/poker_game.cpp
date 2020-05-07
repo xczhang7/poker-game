@@ -35,9 +35,10 @@ int main(){
   vector<int>p3;
   InitCard(card);
   DealCard(card,p1,p2,p3);
+
   insertVec(players[0].file_name,p1);
-  insertVec(players[1].file_name,p3);
-  insertVec(players[2].file_name,p2);
+  insertVec(players[1].file_name,p2);
+  insertVec(players[2].file_name,p3);
 
 
 
