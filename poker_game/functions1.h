@@ -308,7 +308,9 @@ bool isThreeOfApair(vector<int>obj){
   // if ((obj[i]==obj[i+1])==obj[i+2] && (obj[i+3]==obj[i+4])) 
   // return true;
   // if ((obj[i]==obj[i+1]) && (obj[i+2]==obj[i+3]==obj[i+4])) 
-  // return false;
+  // return true;
+  //else
+  //return false;
   
   
   for(int i=0;i<4;++i){
