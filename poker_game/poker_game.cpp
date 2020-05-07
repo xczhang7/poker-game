@@ -1,81 +1,5 @@
 #include "functions.h"
-#include<fstream>
-
-#define SPADE "\xE2\x99\xA0"
-#define CLUB "\xE2\x99\xA3"
-#define HEART "\xE2\x99\xA5"
-#define DIAMOND "\xE2\x99\xA6"
-
-void insertVec(ofstream &s, vector<int>obj){
-  for(int i=0;i<obj.size();++i){
-    switch(obj[i]/13){
-      case 0:s<<SPADE;break;
-      case 1:s<<CLUB;break;
-      case 2:s<<HEART;break;
-      case 3:s<<DIAMOND;
-    }
-    switch(obj[i]%13){
-      case 0:s<<"A ";break;
-      case 10:s<<"J ";break;
-      case 11:s<<"Q ";break;
-      case 12:s<<"K ";break;
-      default:
-        s<<obj[i]%13+1<<' ';
-    }
-  }
-}
-
-bool inVec(string str,vector<string>obj){
-  for(int i=0;i<obj.size();++i){
-    if (obj[i]==str) return true;
-  }
-  return false;
-}
-
-void remVec(string fileName, vector<int>obj){
-  vector<string>obj1;
-  string itr;
-  for(int i=0;i<obj.size();++i){
-    switch(obj[i]/13){
-      case 0:itr=SPADE;break;
-      case 1:itr=CLUB;break;
-      case 2:itr=HEART;break;
-      case 3:itr=DIAMOND;
-    }
-    switch(obj[i]%13){
-      case 0:itr=itr+"A";break;
-      case 10:itr=itr+"J";break;
-      case 11:itr=itr+"Q";break;
-      case 12:itr=itr+"K";break;
-      default:
-        itr=itr+to_string(obj[i]%13+1);
-    }
-  obj1.push_back(itr);
-  }
-
-  vector<string>obj2;
-  ifstream fin;
-  fin.open(fileName);
-  if(fin.fail()){
-    cout<<"Error!"<<endl;
-    exit(1);
-  }
-  string str;
-  while(fin>>str){
-    if(!inVec(str,obj1))
-      obj2.push_back(str);
-    }
-  fin.close();
-
-  ofstream fout(fileName);
-  if(fout.fail()){
-    cout<<"Error!"<<endl;
-    exit(1);
-  }
-  for(int j=0;j<obj2.size();++j)
-    fout<<obj2[j]<<' ';
-  fout.close();
-}
+#include "version 2.h"
 
 int main(){
   //
@@ -95,21 +19,73 @@ int main(){
   for(int i=2;i>=1;--i)
     swap(a[i],a[rand()%i]);
   for(int i=0;i<3;++i){
-    cout<<"Enter your names: ";
+    cout<<"Enter your name, player "<<i+1<<": ";
     cin>>players[a[i]].player_name;
   }
   cout<<"Your orders: "<<endl;
   for(int i=0;i<3;++i){
     cout<<i+1<<". "<<players[i].player_name<<';'<<endl;
-    string str=players[i].player_name+".txt";
-    players[i].file_name=(char*)str.data();
-    cout<<players[i].file_name<<endl;
+    players[i].file_name=players[i].player_name+".txt";
   }
   cout<<endl;
 
+  vector<int>card;
+  vector<int>p1;
+  vector<int>p2;
+  vector<int>p3;
+  InitCard(card);
+  DealCard(card,p1,p2,p3);
+  insertVec(players[0].file_name,p1);
+  insertVec(players[1].file_name,p3);
+  insertVec(players[2].file_name,p2);
 
 
 
+  string winner;
+  vector<int>last;
+  vector<int>now;
+  int i;
+  while (winner.empty()){
+    for(i=0;i<3;i++){
+      guide();
+      cout<<"Command: ";
+      cin>>command;
+      while(command!='&'){
+        switch(command){
+          case 't': {
+            print_chart();
+            cout<<"Command:";
+            cin>>command;
+            break;
+          }
+          case 'p': {
+            cout<<players[i].player_name<<" choose not to play, "
+              <<players[(i+1)%3].player_name<<" continue."<<endl;
+            i++;
+            cout<<"Command: ";
+            cin>>command;
+            break;
+          }
+          case 'c':{
+            cout<<"Cards you going to play:"<<endl;
+            now=creatVec();
+            if(validPlay(last,now)){
+              remVec(players[i].file_name,now);
+              last=now;
+              command='&';
+              break;
+            }
+            else{
+              cout<<"Invalid play!"<<endl;
+              cout<<"Comand:";
+              cin>>command;
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
 
   return 0;
-}
+  }
