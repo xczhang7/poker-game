@@ -26,7 +26,7 @@ struct player{
 #define HEART "\xE2\x99\xA5"
 #define DIAMOND "\xE2\x99\xA6"
 
-//检查文件是否为空。请检查一下写对没。
+//检查文件是否为空。请检查一下写对没。    没问题。
 bool FileEmpty(string fileName){
   ifstream fin;
   string ch;
@@ -251,7 +251,7 @@ bool isOnePair(vector<int>obj){
 
   for(int i=0;i<2;i++)
     obj[i]%=13;
-  sort(obj.begin(),obj.end());
+  sort(obj.begin(),obj.end());   //这一步可以省去吧？
   if(obj[0]==obj[1])
     return true;
   else
@@ -309,7 +309,8 @@ bool isThreeOfApair(vector<int>obj){
       if (repeat>max_repeat)
         max_repeat=repeat;
       else if (repeat<max_repeat&&repeat>sec_repeat)
-        sec_repeat=repeat;
+        sec_repeat=repeat; //不好意思，我对这里感到疑惑。 repeat>=max_repeat
+             //else if 这种情况是否会存在呢？ 抱歉，因为代码不好check，我只能人工检查，很大几率我会出错。
     }
     else
       repeat=1;
@@ -364,7 +365,7 @@ bool isThreeStraight(vector<int>obj){
     obj[i]%=13;
   sort(obj.begin(),obj.end());
   for(int i=0;i<obj.size()-1;i+=3){
-    if (obj[i]!=obj[i+1]||obj[i]!=obj[i+1])
+    if (obj[i]!=obj[i+1]||obj[i]!=obj[i+1]) //是我眼睛花了吗？😂  if (obj[i]!=obj[i+1]||obj[i+1]!=obj[i+2]) ？
       return false;
     if(i+3<obj.size()){
       if(obj[i]!=obj[i+3]-1)
@@ -461,6 +462,8 @@ string cardType(vector<int>obj){
 
 //这几个函数我写的很糙。现在他们连A>4都判断不了，只知道比较纯数字。
 //很需要检查重写。
+
+//我看了👇的cardweight()，逻辑上没有问题，至于你说的A>4都判断不了  我想是因为你定义的 case 0:s<<"A "但是 case 4:4 ，你可以参照最前面的定义
 
 //这个是调取”权重“的函数。
 int cardWeight(vector<int>obj){
