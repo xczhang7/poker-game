@@ -19,11 +19,10 @@ Here is the special changes we made:
 
 The game flow is as follows: 
 
-1. Enter the number of players.
-2. Players enter their playernames, such as "player Deng" and "player Zhang". If there are more than one player, separate the names with Spaces when input. The computer player names are "player1" and "player2".
+1. Enter three player names, such as "player-Deng" and "player-Zhang". Separate the names with Spaces when input. 
 3. Generate the order of playing cards. Each player's rank is displayed on the screen in the format "username: int".
 4. Players take turns opening a file with information about their hand.
-5. In this game, 54 CARDS are represented by the integers 1 to 54. After the players' order is generated, a list will be printed on the screen for easy reference.
+5. In this game, The cards 2,3,4,5,6,7,8,9,10,J,Q,K,A,grey joker and colour joker are represented respectively by 2,3,4,5,6,7,8,9,0,J,Q,K,A,G and C. After the players' order is generated, a list will be printed on the screen for easy reference.
 6. Players take turns playing CARDS. The Numbers entered should be separated by Spaces. If the player chooses not to play this turn, type 0.
 7. When a player's hand is empty, print "username wins!" on the screen.
 
