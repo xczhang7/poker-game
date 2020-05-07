@@ -17,7 +17,7 @@ using namespace std;
 struct player{
   string file_name;
   string player_name;
-  vector<int>hand;
+  vector<string>hand;
 };
 
 //为了打印出红桃方片这些图像。
@@ -28,16 +28,14 @@ struct player{
 
 //检查文件是否为空。请检查一下写对没。
 bool FileEmpty(string fileName){
-  ifstream fin(fileName);
-  if(fin.fail()){
-    cout<<"Error!"<<endl;
-    exit(1);
-  }
-  string c;
-  if(fin>>c)
+  ifstream fin;
+  string ch;
+  fin.open("a.txt");
+  ch=fin.get();
+  if(fin.eof())
     return true;
-  else
-    return false;
+  fin.close();
+  return false;
 }
 
 //节省时间，不用看。
@@ -48,21 +46,9 @@ void guide(){
   cout<<"3.c: play a hand;"<<endl;
 }
 
-void B_sort(vector<int>&obj){
-  sort(obj.begin(),obj.end());
-  int i,j,len=obj.size();
-  for(i=0;i<len-1;i++){
-    for(j=0;j<len-1-i;j++){
-      if(obj[j]<52&&obj[j+1]<52){
-        if(obj[j]%13>obj[j+1]%13)
-          swap(obj[j],obj[j+1]);
-        }
-      }
-    }
-  }
 
 //输入vector<int>，再把手牌输入到对应文件里。要检查。
-void insertVec(string fileName, vector<int>&obj){
+void insertVec(string fileName, vector<int>obj){
   ofstream s;
   s.open(fileName);
   if(s.fail()){
@@ -70,10 +56,13 @@ void insertVec(string fileName, vector<int>&obj){
     exit(1);
   }
 
-  B_sort(obj);
+  sort(obj.begin(),obj.end());
+  for(int j=0;j<obj.size();j++)
+    cout<<obj[j]<<' ';
+  cout<<'\n'<<endl;
 
   for(int i=0;i<obj.size();++i){
-    if(obj[i]<52){
+    if(obj[i]<51){
       switch(obj[i]/13){
         case 0:s<<SPADE;break;
         case 1:s<<CLUB;break;
@@ -310,20 +299,16 @@ bool isThreeofAkind(vector<int>obj){
 bool isThreeOfApair(vector<int>obj){
   if(obj.size()!=5)
     return false;
-
   for(int i=0;i<5;i++)
     obj[i]%=13;
-
   sort(obj.begin(),obj.end());
   int repeat=1,max_repeat=1,sec_repeat=1;
-  for(int i=0;i<5;++i){
+  for(int i=0;i<4;++i){
     if (obj[i]==obj[i+1]){
       repeat++;
-      if (repeat>max_repeat){
-        sec_repeat=max_repeat;
+      if (repeat>max_repeat)
         max_repeat=repeat;
-      }
-      else if (repeat<max_repeat && repeat>sec_repeat)
+      else if (repeat<max_repeat&&repeat>sec_repeat)
         sec_repeat=repeat;
     }
     else
@@ -523,39 +508,36 @@ int cardWeight(vector<int>obj){
     sort(obj.begin(),obj.end());
     return obj[0];
   }
+
   else if(isPlane(obj)){
     for(int i=0;i<obj.size();i++)
       obj[i]%=13;
     sort(obj.begin(),obj.end());
+
     vector<int>body;
+
     for(int i=0;i<obj.size()-2;i++){
       if(obj[i]==obj[i+1]&&obj[i]==obj[i+2]){
         body.push_back(obj[i]);
         i+=2;
       }
     }
-      return body[0];
+    return body[0];
   }
 }
 
 //这个是判断出牌合不合理的函数。
 bool validPlay(vector<int>last,vector<int>now){
-  if(last.size()==0){
-    string s=cardType(now);
-    if(s!="Invalid Play") return true;
-    else return false;
-  }
-  else{
-    string type_last,type_now;
-    type_last=cardType(last);
-    type_now=cardType(now);
-    if (type_now=="Invalid Play") return false;
-    else if (type_now=="Rocket") return true;
-    else if (type_last!="Boomber"&&type_now=="Boomber")return true;
-    else if (type_now==type_last && cardWeight(now)>cardWeight(last))
-        return true;
-    return false;
-  }
+  string type_last,type_now;
+  type_last=cardType(last);
+  type_now=cardType(now);
+  if (last.size()==0) return true;
+  else if (type_now=="Invalid Play") return false;
+  else if (type_now=="Rocket") return true;
+  else if (type_last!="Boomber"&&type_now=="Boomber")return true;
+  else if (type_now==type_last && cardWeight(now)>cardWeight(last))
+      return true;
+  return false;
 }
 
 //这个函数的目的是读取玩家输入，用Vector来储存他们的出牌信息。

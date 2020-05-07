@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "version 2.h"
+#include<stdio.h>
 
 int main(){
   //
@@ -30,17 +31,11 @@ int main(){
   cout<<endl;
 
   vector<int>card;
-  vector<int>p1;
-  vector<int>p2;
-  vector<int>p3;
   InitCard(card);
-  DealCard(card,p1,p2,p3);
-
-  insertVec(players[0].file_name,p1);
-  insertVec(players[1].file_name,p2);
-  insertVec(players[2].file_name,p3);
-
-
+  DealCard(card,players[0].hand,players[1].hand,players[2].hand);
+  insertVec(players[0].file_name,players[0].hand);
+  insertVec(players[1].file_name,players[1].hand);
+  insertVec(players[2].file_name,players[2].hand);
 
   string winner;
   vector<int>last;
@@ -49,6 +44,7 @@ int main(){
   while (winner.empty()){
     for(i=0;i<3;i++){
       guide();
+      cout<<players[i].player_name<<" go."<<endl;
       cout<<"Command: ";
       cin>>command;
       while(command!='&'){
@@ -62,9 +58,7 @@ int main(){
           case 'p': {
             cout<<players[i].player_name<<" choose not to play, "
               <<players[(i+1)%3].player_name<<" continue."<<endl;
-            i++;
-            cout<<"Command: ";
-            cin>>command;
+            command='&';
             break;
           }
           case 'c':{
@@ -85,8 +79,14 @@ int main(){
           }
         }
       }
+      if(FileEmpty(players[i].file_name))
+        winner=players[i].player_name;
     }
+    vector<int>().swap(last);
+    vector<int>().swap(now);
   }
-
+  cout<<"Winner of the game is "<<winner<<endl;
+  for(int i=0;i<3;++i)
+    cout<<players[i].file_name<<endl;;
   return 0;
   }
