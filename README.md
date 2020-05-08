@@ -23,7 +23,7 @@ The game flow is as follows:
 3. Generate the order of playing cards. Each player's rank is displayed on the screen in the format "int: username".
 4. Players take turns opening a file with information about their hand.
 5. In this game, 54 CARDS are represented by the integers 1 to 54. After the players' order is generated, a list will be printed on the screen for easy reference.
-6. Players take turns playing CARDS. The Numbers entered should be separated by Spaces. If the player chooses not to play this turn, type 0.
+6. Players take turns playing CARDS. The Numbers entered should be separated by Spaces. If the player chooses not to play this turn, type .
 7. When a player's hand is empty, print "username wins!" on the screen.
 
 
@@ -36,6 +36,3 @@ The game flow is as follows:
 5. Split the program into multiple files. pocker_game.cpp should include the main function, each of other files should have at least one function.
 
 
-## Video
-
-https://youtu.be/6w3i8W_RC9U
