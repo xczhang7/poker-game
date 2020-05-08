@@ -34,3 +34,8 @@ The game flow is as follows:
 3. Each time a player plays a valid card, the file that stores his hands will be updated. 
 4. Create files called "Player1.txt", "Player2.txt" and "Player3.txt", each file store the cards the player own into it.
 5. Split the program into multiple files. pocker_game.cpp should include the main function, each of other files should have at least one function.
+
+
+## Video
+
+https://youtu.be/6w3i8W_RC9U
