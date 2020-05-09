@@ -35,4 +35,6 @@ The game flow is as follows:
 4. Create files called "Player1.txt", "Player2.txt" and "Player3.txt", each file store the cards the player own into it.
 5. Split the program into multiple files. pocker_game.cpp should include the main function, each of other files should have at least one function.
 
+## Coding environment
+The main program file of this game is "poker_game.cpp", which is in the directory "poker_game1". The program can compile and execute on  the gcc C/C++11 environment on the CS Linux servers(academy*). The following compilation command is recommended: g++ -pedantic-errors -std=c++11 2.cpp.
 
