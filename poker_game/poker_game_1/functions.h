@@ -316,7 +316,6 @@ bool isOnePair(vector<int>obj){
 
   for(int i=0;i<2;i++)
     obj[i]%=13;
-  sort(obj.begin(),obj.end());
   if(obj[0]==obj[1])
     return true;
   else
@@ -433,7 +432,7 @@ bool isThreeStraight(vector<int>obj){
     obj[i]%=13;
   sort(obj.begin(),obj.end());
   for(int i=0;i<obj.size()-1;i+=3){
-    if (obj[i]!=obj[i+1]||obj[i]!=obj[i+1])
+    if (obj[i]!=obj[i+1]||obj[i]!=obj[i+2])
       return false;
     if(i+3<obj.size()){
       if(obj[i]!=obj[i+3]-1)
@@ -533,50 +532,101 @@ string cardType(vector<int>obj){
 
 //这个是调取”权重“的函数。
 int cardWeight(vector<int>obj){
-  if(obj.size()==1)
-    return obj[0]%13;
+  int result;
+  if(obj.size()==1){
+    result=obj[0];
+    if(result>51)
+      return result;
+    else{
+      result%=13;
+      if(result<2)
+        return result+13;
+      else
+        return result;
+    }
+  }
+
   else if(isFourTwo(obj)){
     for(int i=0;i<6;i++)
       obj[i]%=13;
     sort(obj.begin(),obj.end());
-    return obj[3];
+    result=obj[3];
+    if(result<2)
+      result+=13;
+    return result;
   }
-  else if(isBoomber(obj))
-      return obj[0]%13;
-  else if(isOnePair(obj))
-      return obj[0]%13;
-  else if(isThree(obj))
-      return obj[0]%13;
+
+  else if(isBoomber(obj)){
+      result=obj[0]%13;
+      if(result<2)
+        result+=13;
+      return result;
+    }
+
+  else if(isOnePair(obj)){
+      result=obj[0]%13;
+      if(result<2)
+        result+=13;
+      return result;
+    }
+
+  else if(isThree(obj)){
+      result=obj[0]%13;
+      if(result<2)
+        result+=13;
+      return result;
+    }
+
   else if(isThreeofAkind(obj)){
     for(int i=0;i<4;i++)
       obj[i]%=13;
     sort(obj.begin(),obj.end());
-    return obj[2];
+    result=obj[2];
+    if(result<2)
+      result+=13;
+    return result;
   }
+
   else if(isThreeOfApair(obj)){
     for(int i=0;i<5;i++)
       obj[i]%=13;
     sort(obj.begin(),obj.end());
-    return obj[2];
+    result=obj[2];
+    if(result<2)
+      result+=13;
+    return result;
   }
+
   else if(isStraight(obj)){
     for(int i=0;i<obj.size();i++)
       obj[i]%=13;
     sort(obj.begin(),obj.end());
-    return obj[0];
+    result=obj[0];
+    if(result<2)
+      result+=13;
+    return result;
   }
+
   else if(isPairStraight(obj)){
     for(int i=0;i<obj.size();i++)
       obj[i]%=13;
     sort(obj.begin(),obj.end());
-    return obj[0];
+    result=obj[0];
+    if(result<2)
+      result+=13;
+    return result;
   }
+
   else if(isThreeStraight(obj)){
     for(int i=0;i<obj.size();i++)
       obj[i]%=13;
     sort(obj.begin(),obj.end());
-    return obj[0];
+    result=obj[0];
+    if(result<2)
+      result+=13;
+    return result;
   }
+
   else if(isPlane(obj)){
     for(int i=0;i<obj.size();i++)
       obj[i]%=13;
@@ -588,7 +638,10 @@ int cardWeight(vector<int>obj){
         i+=2;
       }
     }
-      return body[0];
+    result=body[0];
+    if(result<2)
+      result+=13;
+    return result;
   }
 }
 

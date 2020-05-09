@@ -40,7 +40,7 @@ int main(){
   string winner;
   vector<int>last;
   vector<int>now;
-  int i;
+  int i,breaks=0;
   while (winner.size()==0){
     for(i=0;i<3;i++){
       guide();
@@ -59,6 +59,7 @@ int main(){
             cout<<players[i].player_name<<" choose not to play, "
               <<players[(i+1)%3].player_name<<" continue."<<endl;
             command='&';
+            breaks++;
             break;
           }
           case 'c':{
@@ -91,9 +92,13 @@ int main(){
         winner=players[i].player_name;
         break;
       }
+      if(breaks==2){
+        vector<int>().swap(last);
+        vector<int>().swap(now);
+        breaks=0;
+      }
     }
-    vector<int>().swap(last);
-    vector<int>().swap(now);
+
   }
   cout<<"Winner of the game is "<<winner<<endl;
   char *ch;
